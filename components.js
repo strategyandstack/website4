@@ -16,19 +16,20 @@ export const createBlueprintNavItem = (bp, isActive = false) => `
 
 export const createBlueprintDisplay = (bp, lang = 'en') => {
     const l = lang === 'es' 
-        ? { blueprint: 'Nuestro Sistema', manual: 'Manual', timeline: 'Tiempo', cta: 'Agenda una Llamada', automated: 'Automatizado', time: 'Tiempo', custom: 'Cotización Personalizada' }
-        : { blueprint: 'Our System', manual: 'Manual', timeline: 'Timeline', cta: 'Book Strategy Call', automated: 'Automated', time: 'Time', custom: 'Custom Quote' };
+        ? { blueprint: 'Nuestro Sistema', manual: 'Manual', timeline: 'Tiempo', cta: 'Agenda una Llamada', custom: 'Cotización Personalizada' }
+        : { blueprint: 'Our System', manual: 'Manual', timeline: 'Timeline', cta: 'Book Strategy Call', custom: 'Custom Quote' };
     
     const priceDisplay = bp.price === 'Custom' || bp.price === 'Personalizado' ? l.custom : bp.price;
     const maxHours = 200;
     const bpPct = bp.comparison.blueprint_hours ? (bp.comparison.blueprint_hours / maxHours) * 100 : 0;
     const manPct = bp.comparison.manual_hours ? (bp.comparison.manual_hours / maxHours) * 100 : 0;
     
-    const hoursHtml = bp.comparison.blueprint_hours && bp.comparison.manual_hours ? `
+    // Only show hours comparison if both values exist
+    const hoursHtml = (bp.comparison.blueprint_hours && bp.comparison.manual_hours) ? `
 <div class="hours-comparison">
     <div class="hours-row"><span class="hours-label">${l.blueprint}</span><div class="hours-bar-container"><div class="hours-bar blueprint" style="width:0%" data-width="${bpPct}%"></div></div><span class="hours-value">${bp.comparison.blueprint_hours} hrs</span></div>
     <div class="hours-row"><span class="hours-label">${l.manual}</span><div class="hours-bar-container"><div class="hours-bar manual" style="width:0%" data-width="${manPct}%"></div></div><span class="hours-value manual">${bp.comparison.manual_hours}+ hrs</span></div>
-</div>` : `<div class="hours-comparison"><div class="hours-row"><span class="hours-label">${l.time}</span><div class="hours-bar-container"><div class="hours-bar blueprint" style="width:100%"></div></div><span class="hours-value">${l.automated}</span></div></div>`;
+</div>` : '';
     
     return `
 <div class="blueprint-lightbar"></div><div class="scan-line"></div>
@@ -52,10 +53,11 @@ export const createBlueprintAccordion = (blueprints, lang = 'en') => {
     
     return `<div class="blueprint-accordion">${blueprints.map((bp, i) => {
         const price = bp.price === 'Custom' || bp.price === 'Personalizado' ? l.custom : bp.price;
-        const hours = bp.comparison.blueprint_hours && bp.comparison.manual_hours ? `
+        // Only show hours if both values exist
+        const hours = (bp.comparison.blueprint_hours && bp.comparison.manual_hours) ? `
 <div class="mobile-hours">
     <div class="mobile-hours-row"><span class="text-xs text-white/40 uppercase tracking-wider font-bold">${l.blueprint}</span><span class="text-sm font-bold">${bp.comparison.blueprint_hours} hrs</span></div>
-    <div class="mobile-hours-row"><span class="text-xs text-white/40 uppercase tracking-wider font-bold">${l.manual}</span><span class="text-sm font-bold text-white/40">${bp.comparison.manual_hours}+ hrs</span></div>
+    <div class="mobile-hours-row"><span class="text-xs text-white/40 uppercase tracking-wider font-bold">${l.manual}</span><span class="text-sm font-bold manual-time">${bp.comparison.manual_hours}+ hrs</span></div>
 </div>` : '';
         return `
 <div class="blueprint-accordion-item ${i === 0 ? 'active' : ''}" data-index="${i}">
@@ -80,7 +82,9 @@ export const createBlueprintAccordion = (blueprints, lang = 'en') => {
 export const createPricingCard = (pkg, lang = 'en') => {
     const isPopular = pkg.popular;
     const isCustom = pkg.price === 'Custom' || pkg.price === 'Personalizado';
-    const l = lang === 'es' ? { popular: 'Más Popular', cta: 'Agenda una Llamada', custom: 'Personalizado' } : { popular: 'Most Popular', cta: 'Book Strategy Call', custom: 'Custom' };
+    const l = lang === 'es' 
+        ? { popular: 'Más Popular', cta: 'Comenzar', custom: 'Personalizado' } 
+        : { popular: 'Most Popular', cta: 'Get Started', custom: 'Custom' };
     
     return `
 <div class="pricing-card ${isPopular ? 'popular' : ''}">
@@ -111,3 +115,20 @@ export const createFaqItem = (item, index) => `
     <summary class="faq-summary"><span>${item.question}</span><svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
     <div class="faq-content">${item.answer}</div>
 </details>`;
+
+export const createMarketDynamics = (items, lang = 'en') => {
+    const label = lang === 'es' ? 'Lo Que Depende de Tu Mercado' : 'What Depends on Your Market';
+    return `
+<div class="market-dynamics">
+    <div class="market-dynamics-label">${label}</div>
+    <div class="market-dynamics-list">
+        ${items.map(item => `<span class="market-dynamics-item">${item}</span>`).join('')}
+    </div>
+</div>`;
+};
+
+export const createSecondaryCTANote = (noteText, scarcityText) => `
+<div class="cta-secondary-note">
+    <div class="note-line">${noteText}</div>
+    <div class="scarcity-line">${scarcityText}</div>
+</div>`;
