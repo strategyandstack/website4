@@ -1,7 +1,7 @@
 export const salesArchitectureData = {
   "meta": {
     "name": "Strategy & Stack",
-    "version": "4.0",
+    "version": "5.0",
     "tagline": "Build Your Sales Engine Faster Than Ever",
     "website": "StrategyandStack.com",
     "powered_by": "LinkedIn Success Formula + AuthGen + RocketsTraffic + Evil Genius Corp"
@@ -26,9 +26,9 @@ export const salesArchitectureData = {
       "You own everything we build (accounts, content, data)"
     ],
     "what_depends_on_market": [
-      "Response rates and conversion rates",
+      "How prospects respond to your outreach",
       "Meetings booked and deals closed",
-      "Cost per lead and cost per acquisition"
+      "Your cost per lead and customer acquisition"
     ]
   },
   "blueprints": [
@@ -38,7 +38,7 @@ export const salesArchitectureData = {
       "name": "Account Setup",
       "tagline": "The foundation for everything",
       "description": "We install the infrastructure you need before sending a single message: verified domains, warmed email accounts, optimized LinkedIn profiles, and a conversion-focused landing page.",
-      "timeline": "2 to 3 weeks from kickoff to fully warmed inboxes",
+      "timeline": "2 to 4 weeks from kickoff to ensure fully warmed inboxes",
       "price": "$8,125",
       "deliverables": [
         "2 custom domains with SPF, DKIM, and DMARC configured",
@@ -57,8 +57,8 @@ export const salesArchitectureData = {
       "number": 2,
       "name": "Content",
       "tagline": "Build trust before your first message lands",
-      "description": "12 weeks of LinkedIn and Instagram content using a proven 40/30/30 framework: Educational, Personal, and Sales content that positions you as an expert.",
-      "timeline": "Content calendar delivered within 2 weeks",
+      "description": "LinkedIn and Instagram content using a proven 40/30/30 framework: Educational, Personal, and Sales content that positions you as an expert.",
+      "timeline": "Content calendar to cover 3+ months, delivered within 2 weeks",
       "price": "$2,625",
       "deliverables": [
         "26 platform-native posts for LinkedIn and Instagram",
@@ -76,8 +76,8 @@ export const salesArchitectureData = {
       "number": 3,
       "name": "Ads",
       "tagline": "Paid advertising that accelerates everything",
-      "description": "We set up and run lead generation campaigns on Meta, Google, and LinkedIn for 30 days using a structured funnel approach: Awareness (25%), Consideration (25%), and Decision (50%) stage ads.",
-      "timeline": "Campaigns live within the first week",
+      "description": "We set up and run lead generation campaigns on Meta, Google, and LinkedIn using a structured funnel approach: Awareness (25%), Consideration (25%), and Decision (50%) stage ads.",
+      "timeline": "Campaigns live within the first week, runs for 30 days",
       "price": "$7,750",
       "deliverables": [
         "Campaign setup across Meta, Google, and LinkedIn",
@@ -180,7 +180,7 @@ export const salesArchitectureData = {
     },
     {
       "question": "How do you guarantee email deliverability?",
-      "answer": "We guarantee correct infrastructure: verified domains, SPF, DKIM, and DMARC configured, plus inboxes warmed to 95%+ deliverability scores before any outreach begins. We monitor deliverability throughout the engagement. Actual response rates depend on your offer, market, and targeting."
+      "answer": "We guarantee correct infrastructure: verified domains, SPF, DKIM, and DMARC configured, plus inboxes warmed to 98%+ deliverability scores before any outreach begins. We monitor deliverability throughout the engagement. Actual response rates depend on your offer, market, and targeting."
     },
     {
       "question": "Can I customize the outreach messages?",
@@ -192,7 +192,7 @@ export const salesArchitectureData = {
     },
     {
       "question": "How long until I see results?",
-      "answer": "Account Setup takes 2 to 3 weeks for domain warming and profile optimization. Once live, outbound campaigns typically generate responses within the first 2 weeks. Content builds momentum over 4 to 6 weeks. Ads can drive traffic immediately once launched. Most clients see meaningful pipeline activity within 30 to 45 days of going live."
+      "answer": "Account Setup takes 2 to 4 weeks for domain warming and profile optimization. Once live, outbound campaigns typically generate responses within the first 2 weeks. Content builds momentum over 4 to 6 weeks. Ads can drive traffic immediately once launched. Most clients see meaningful pipeline activity within 30 to 45 days of going live."
     },
     {
       "question": "What do I need to provide?",
@@ -215,7 +215,7 @@ export const salesArchitectureData = {
     "stats": [
       {"metric": "Time Savings", "value": "70", "suffix": "%+"},
       {"metric": "Faster Than DIY", "value": "7", "suffix": "x"},
-      {"metric": "Deliverability Target", "value": "95", "suffix": "%+"}
+      {"metric": "Deliverability Target", "value": "98", "suffix": "%+"}
     ]
   },
   "cta_sections": {
@@ -228,7 +228,9 @@ export const salesArchitectureData = {
     "secondary": {
       "headline": "Not sure where to start?",
       "subheadline": "Let's audit your current stack and identify the biggest leverage point.",
-      "button_text": "Schedule a Discovery Call"
+      "button_text": "Schedule a Discovery Call",
+      "note_text": "Zero commitment",
+      "scarcity_text": "We onboard 2 clients per month to ensure quality"
     }
   },
   "next_steps": [
