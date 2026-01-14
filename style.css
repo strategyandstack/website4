@@ -532,7 +532,7 @@ h1, h2, h3, h4 { letter-spacing: -0.04em; font-weight: 900; }
 }
 
 .hours-bar.manual {
-    background: linear-gradient(90deg, var(--manual-red), var(--manual-orange));
+    background: linear-gradient(90deg, var(--manual-orange), var(--manual-red));
 }
 
 .hours-value {
