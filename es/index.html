@@ -75,7 +75,7 @@
           "@id": "https://strategyandstack.com/#organization",
           "name": "Strategy & Stack",
           "url": "https://strategyandstack.com",
-          "logo": {"@type": "ImageObject", "url": "https://strategyandstack.com/logo.png", "width": 512, "height": 512},
+          "logo": {"@type": "ImageObject", "url": "https://strategyandstack.com/favicon.svg", "width": 512, "height": 512},
           "description": "Arquitectura de Ventas: Cinco sistemas modulares que generan ingresos usando automatización, IA y estrategias comprobadas.",
           "contactPoint": {"@type": "ContactPoint", "contactType": "ventas", "url": "https://app.apollo.io/#/meet/managed-meetings/eddie/hor-57g-ivh/start", "availableLanguage": ["English", "Spanish"]}
         },
@@ -103,58 +103,29 @@
           "@id": "https://strategyandstack.com/es/#service",
           "name": "Sistemas de Arquitectura de Ventas",
           "provider": {"@id": "https://strategyandstack.com/#organization"},
-          "description": "Cinco sistemas modulares: Configuración de Cuentas, Contenido, Anuncios, Outbound y Automatización de Procesos. 70%+ ahorro de tiempo comparado con enfoques manuales.",
-          "serviceType": "Automatización de Ventas B2B",
-          "areaServed": [{"@type": "Place", "name": "Latinoamérica"}, {"@type": "Place", "name": "Mundial"}],
-          "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Paquetes de Arquitectura de Ventas",
-            "itemListElement": [
-              {"@type": "Offer", "name": "Sistema de Configuración de Cuentas", "price": "8125", "priceCurrency": "USD", "description": "Configuración de dominios, calentamiento de correos, optimización de LinkedIn, landing page"},
-              {"@type": "Offer", "name": "Sistema de Contenido", "price": "2625", "priceCurrency": "USD", "description": "12 semanas de contenido para LinkedIn e Instagram"},
-              {"@type": "Offer", "name": "Sistema de Anuncios", "price": "7750", "priceCurrency": "USD", "description": "Campañas de generación de leads de 30 días en Meta, Google, LinkedIn"},
-              {"@type": "Offer", "name": "Sistema Outbound", "price": "4875", "priceCurrency": "USD", "description": "90 días de alcance a 1,000 leads calificados"},
-              {"@type": "Offer", "name": "Paquete Starter", "price": "11750", "priceCurrency": "USD", "description": "Configuración de Cuentas + Outbound"},
-              {"@type": "Offer", "name": "Paquete Growth", "price": "13750", "priceCurrency": "USD", "description": "Configuración + Contenido + Outbound"},
-              {"@type": "Offer", "name": "Paquete Full Stack", "price": "21000", "priceCurrency": "USD", "description": "Los cuatro sistemas de ventas"}
-            ]
-          }
-        },
-        {
-          "@type": "FAQPage",
-          "@id": "https://strategyandstack.com/es/#faq",
-          "mainEntity": [
-            {"@type": "Question", "name": "¿En qué se diferencia de contratar una agencia?", "acceptedAnswer": {"@type": "Answer", "text": "Las agencias cobran retainers mensuales y son dueñas de la relación con tus herramientas. Nosotros instalamos infraestructura que es completamente tuya. Sin dependencia, sin contratos de permanencia."}},
-            {"@type": "Question", "name": "¿Con qué industrias trabajan?", "acceptedAnswer": {"@type": "Answer", "text": "Negocios de servicios B2B: agencias, consultorías, empresas SaaS, firmas de servicios profesionales y proveedores de servicios habilitados por tecnología."}},
-            {"@type": "Question", "name": "¿Cuánto tiempo hasta ver resultados?", "acceptedAnswer": {"@type": "Answer", "text": "La Configuración de Cuentas toma 2-3 semanas. El outbound genera respuestas en las primeras 2 semanas de estar activo. La mayoría ve actividad significativa en 30-45 días."}},
-            {"@type": "Question", "name": "¿Cuál es la inversión típica?", "acceptedAnswer": {"@type": "Answer", "text": "La mayoría de los equipos invierten entre $12k y $21k. Starter ($11,750), Growth ($13,750), o Full Stack ($21,000)."}}
-          ]
+          "description": "Implementación modular de sistemas de ventas incluyendo configuración de cuentas, creación de contenido, publicidad, campañas outbound y automatización de procesos.",
+          "serviceType": "Consultoría de Ventas B2B",
+          "areaServed": {"@type": "Place", "name": "Mundial"}
         }
       ]
     }
     </script>
 </head>
-<body class="bg-black text-white overflow-x-hidden">
+<body class="antialiased">
     <div class="mesh-container"><div class="mesh-gradient"></div></div>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 px-4 py-4">
-        <div class="max-w-6xl mx-auto flex justify-between items-center glass-card px-5 py-2.5 rounded-lg border-white/10">
-            <div class="flex items-center gap-2">
-                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6">
-                    <path d="M50 80L20 62V52L50 70L80 52V62L50 80Z" fill="#A855F7" opacity="0.5"/>
-                    <path d="M50 65L20 47V37L50 55L80 37V47L50 65Z" fill="#A855F7" opacity="0.75"/>
-                    <path d="M50 50L20 32V22L50 40L80 22V32L50 50Z" fill="#A855F7"/>
-                    <path d="M50 12L58 24H53V36H47V24H42L50 12Z" fill="#A855F7"/>
-                </svg>
-                <span class="font-black tracking-tighter text-lg uppercase">Strategy<span class="opacity-40">&</span>Stack</span>
-            </div>
-            <div class="hidden lg:flex items-center gap-8">
-                <div class="flex gap-8 text-[9px] font-black uppercase tracking-[0.15em] text-white/50">
+    <nav class="fixed top-0 left-0 right-0 z-50 px-4 py-4">
+        <div class="glass-card max-w-6xl mx-auto px-5 py-3 rounded-xl border-white/10 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="/es/" class="flex items-center gap-2">
+                    <img src="/favicon.svg" alt="Strategy & Stack" class="w-5 h-5">
+                    <span class="font-black text-lg tracking-tighter uppercase">Strategy<span class="opacity-30">&</span>Stack</span>
+                </a>
+                <div class="hidden lg:flex gap-8 text-[9px] font-black uppercase tracking-[0.15em] text-white/50">
                     <a href="#sistemas" class="nav-link hover:text-white transition-colors">Sistemas</a>
                     <a href="#paquetes" class="nav-link hover:text-white transition-colors">Paquetes</a>
                 </div>
-                <a href="/" class="lang-toggle">EN</a>
+                <a href="/" class="lang-toggle hidden lg:flex">EN</a>
             </div>
             <div class="flex items-center gap-3">
                 <a href="/" class="lang-toggle lg:hidden">EN</a>
@@ -177,7 +148,7 @@
                 </div>
                 <div class="email-editor-container hidden lg:block">
                     <div class="email-editor rounded-xl overflow-hidden border border-white/10">
-                        <div class="flex items-center px-4 py-2.5 bg-black/60 border-b border-white/10">
+                        <div class="flex items-center px-4 py-2.5 bg-[#1a1a1a] border-b border-white/10">
                             <div class="flex gap-1.5 mr-4"><span class="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#28c840]"></span></div>
                             <div class="editor-tabs flex overflow-x-auto" role="tablist">
                                 <button class="editor-tab active" role="tab" aria-selected="true" data-tab="linkedin"><span>🔗</span> LinkedIn</button>
@@ -197,7 +168,7 @@
             </div>
         </section>
 
-        <section class="py-10 border-y border-white/5 bg-white/[0.01]"><div class="max-w-4xl mx-auto px-4"><div class="grid grid-cols-3 gap-8" id="stats-grid"></div></div></section>
+        <section id="stats-section" class="py-10 border-y border-white/5 bg-white/[0.01]"><div class="max-w-4xl mx-auto px-4"><div class="grid grid-cols-3 gap-8" id="stats-grid"></div></div></section>
 
         <section class="py-16 px-4">
             <div class="max-w-6xl mx-auto">
@@ -232,7 +203,7 @@
         <section class="py-16 px-4 mb-8">
             <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-5">
                 <div class="glass-card p-10 rounded-2xl border-white/15 group hover:border-white/30 transition-all section-reveal"><h3 class="text-2xl md:text-3xl font-black mb-4 tracking-tighter uppercase" id="cta-primary-title"></h3><p class="text-sm text-gray-400 mb-8 leading-relaxed" id="cta-primary-sub"></p><a href="https://app.apollo.io/#/meet/managed-meetings/eddie/hor-57g-ivh/start" target="_blank" rel="noopener noreferrer" class="btn-primary w-full text-center block" id="cta-primary-btn"></a><p class="mt-5 text-center text-[9px] uppercase tracking-[0.25em] font-black text-white/30" id="cta-primary-secondary"></p></div>
-                <div class="glass-card p-10 rounded-2xl border-white/5 group hover:border-white/15 transition-all section-reveal"><h3 class="text-2xl md:text-3xl font-black mb-4 tracking-tighter uppercase" id="cta-secondary-title"></h3><p class="text-sm text-gray-400 mb-8 leading-relaxed" id="cta-secondary-sub"></p><a href="https://app.apollo.io/#/meet/managed-meetings/eddie/hor-57g-ivh/start" target="_blank" rel="noopener noreferrer" class="btn-secondary w-full text-center block" id="cta-secondary-btn"></a></div>
+                <div id="cta-secondary-card" class="glass-card p-10 rounded-2xl border-white/5 group hover:border-white/15 transition-all section-reveal"><h3 class="text-2xl md:text-3xl font-black mb-4 tracking-tighter uppercase" id="cta-secondary-title"></h3><p class="text-sm text-gray-400 mb-8 leading-relaxed" id="cta-secondary-sub"></p><a href="https://app.apollo.io/#/meet/managed-meetings/eddie/hor-57g-ivh/start" target="_blank" rel="noopener noreferrer" class="btn-secondary w-full text-center block" id="cta-secondary-btn"></a></div>
             </div>
         </section>
     </main>
@@ -240,7 +211,10 @@
     <footer class="py-12 px-4 border-t border-white/5">
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
             <div>
-                <div class="flex items-center gap-2 mb-3"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"><path d="M50 80L20 62V52L50 70L80 52V62L50 80Z" fill="#A855F7" opacity="0.5"/><path d="M50 65L20 47V37L50 55L80 37V47L50 65Z" fill="#A855F7" opacity="0.75"/><path d="M50 50L20 32V22L50 40L80 22V32L50 50Z" fill="#A855F7"/><path d="M50 12L58 24H53V36H47V24H42L50 12Z" fill="#A855F7"/></svg><span class="font-black text-xl tracking-tighter uppercase">Strategy<span class="opacity-30">&</span>Stack</span></div>
+                <div class="flex items-center gap-2 mb-3">
+                    <img src="/favicon.svg" alt="Strategy & Stack" class="w-5 h-5">
+                    <span class="font-black text-xl tracking-tighter uppercase">Strategy<span class="opacity-30">&</span>Stack</span>
+                </div>
                 <div class="text-white/40 font-black text-[9px] uppercase tracking-[0.25em] mb-4" id="footer-tagline"></div>
                 <div class="text-[8px] text-white/20 uppercase tracking-[0.15em] font-bold" id="footer-powered"></div>
             </div>
