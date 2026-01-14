@@ -1,7 +1,8 @@
 import { salesArchitectureData as data } from './data.js';
 import { 
     createValuePropCard, 
-    createBlueprintModule, 
+    createBlueprintNavItem,
+    createBlueprintDisplay,
     createPricingCard, 
     createStatItem
 } from './components.js';
@@ -59,14 +60,41 @@ P.S. {{RANDOM | No pitch on the call | This isn't a sales call | Just a quick st
 {{RANDOM | {{senderName}} | All the best, {{senderName}} | Cheers, {{senderName}}}}`
 };
 
+// State management
+let currentBlueprintIndex = 0;
+let typingInterval = null;
+let isTyping = false;
+
 document.addEventListener('DOMContentLoaded', () => {
     if (!data) return;
     initLayout();
+    initNavScroll();
     initEmailEditor();
+    initBlueprintInteraction();
     initAnimations();
     initStatsCounter();
     lucide.createIcons();
 });
+
+// Navigation scroll effect
+function initNavScroll() {
+    const nav = document.querySelector('nav');
+    if (!nav) return;
+    
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+        
+        if (currentScroll > 50) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+        
+        lastScroll = currentScroll;
+    }, { passive: true });
+}
 
 function initLayout() {
     document.title = data.meta.name + " | " + data.meta.tagline;
@@ -115,12 +143,25 @@ function initLayout() {
         });
     }
 
-    // Blueprints
+    // Blueprints - New interactive layout
     const blueprintContainer = document.getElementById('blueprints-container');
     if (blueprintContainer) {
-        data.blueprints.forEach(bp => {
-            blueprintContainer.innerHTML += createBlueprintModule(bp);
+        // Create the dashboard layout
+        let navItems = '';
+        data.blueprints.forEach((bp, index) => {
+            navItems += createBlueprintNavItem(bp, index === 0);
         });
+        
+        blueprintContainer.innerHTML = `
+            <div class="blueprint-dashboard">
+                <div class="blueprint-nav">
+                    ${navItems}
+                </div>
+                <div class="blueprint-display" id="blueprint-display">
+                    ${createBlueprintDisplay(data.blueprints[0])}
+                </div>
+            </div>
+        `;
     }
 
     // Pricing
@@ -183,19 +224,109 @@ function initLayout() {
     }
 }
 
-// Email Editor with typing animation
+// Blueprint interaction with animations
+function initBlueprintInteraction() {
+    const navItems = document.querySelectorAll('.blueprint-nav-item');
+    const display = document.getElementById('blueprint-display');
+    
+    if (navItems.length === 0 || !display) return;
+    
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const index = parseInt(item.dataset.blueprintIndex);
+            if (index === currentBlueprintIndex) return;
+            
+            // Update nav active state
+            navItems.forEach(n => n.classList.remove('active'));
+            item.classList.add('active');
+            
+            // Load new blueprint with animations
+            loadBlueprint(index);
+        });
+    });
+}
+
+function loadBlueprint(index) {
+    const display = document.getElementById('blueprint-display');
+    const bp = data.blueprints[index];
+    
+    if (!display || !bp) return;
+    
+    currentBlueprintIndex = index;
+    
+    // Trigger scan animation
+    display.classList.remove('scanning');
+    void display.offsetWidth; // Force reflow
+    display.classList.add('scanning');
+    
+    // Update content
+    display.innerHTML = createBlueprintDisplay(bp);
+    
+    // Scramble title animation
+    const titleElement = display.querySelector('.display-title');
+    if (titleElement) {
+        scrambleText(titleElement, `${bp.name.toUpperCase()} BLUEPRINT`);
+    }
+    
+    // Reinitialize icons
+    lucide.createIcons();
+}
+
+// Text scramble animation
+function scrambleText(element, targetText) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let iteration = 0;
+    const duration = 600; // ms
+    const interval = 30; // ms per frame
+    const totalIterations = duration / interval;
+    
+    const scrambleInterval = setInterval(() => {
+        element.textContent = targetText.split('').map((char, idx) => {
+            if (char === ' ') return ' ';
+            if (idx < iteration) return targetText[idx];
+            return chars[Math.floor(Math.random() * chars.length)];
+        }).join('');
+        
+        iteration += targetText.length / totalIterations;
+        
+        if (iteration >= targetText.length) {
+            element.textContent = targetText;
+            clearInterval(scrambleInterval);
+        }
+    }, interval);
+}
+
+// Email Editor with improved typing animation
 function initEmailEditor() {
     const tabs = document.querySelectorAll('.editor-tab');
     const panels = document.querySelectorAll('.tab-panel');
     
     if (tabs.length === 0) return;
 
-    // Start typing animation for first tab
-    setTimeout(() => typeText('linkedin'), 500);
+    // Pre-render all panels with highlighted syntax (hidden)
+    Object.keys(emailTemplates).forEach(tabName => {
+        const panel = document.getElementById(`tab-${tabName}`);
+        if (panel) {
+            const textElement = panel.querySelector('.editor-text');
+            if (textElement) {
+                // Store the full highlighted content as data attribute
+                textElement.dataset.fullContent = highlightSyntax(emailTemplates[tabName]);
+                textElement.innerHTML = '<span class="typing-cursor"></span>';
+            }
+        }
+    });
+
+    // Start typing animation for first tab after a short delay
+    requestAnimationFrame(() => {
+        setTimeout(() => typeText('linkedin'), 300);
+    });
 
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             const tabName = tab.dataset.tab;
+            
+            // Stop any current typing
+            stopTyping();
             
             // Update tab states
             tabs.forEach(t => {
@@ -210,20 +341,25 @@ function initEmailEditor() {
             const activePanel = document.getElementById(`tab-${tabName}`);
             if (activePanel) {
                 activePanel.classList.remove('hidden');
-                typeText(tabName);
+                // Small delay to ensure DOM is ready
+                requestAnimationFrame(() => {
+                    typeText(tabName);
+                });
             }
         });
     });
 }
 
-let typingInterval = null;
-
-function typeText(tabName) {
-    // Clear any existing typing animation
+function stopTyping() {
     if (typingInterval) {
         clearInterval(typingInterval);
         typingInterval = null;
     }
+    isTyping = false;
+}
+
+function typeText(tabName) {
+    stopTyping();
 
     const panel = document.getElementById(`tab-${tabName}`);
     if (!panel) return;
@@ -234,41 +370,45 @@ function typeText(tabName) {
     const template = emailTemplates[tabName];
     if (!template) return;
     
-    // Clear existing content
-    textElement.innerHTML = '';
+    isTyping = true;
     
-    // Prepare highlighted text
+    // Get the full highlighted HTML
     const highlightedText = highlightSyntax(template);
     
-    // Create a temporary element to get plain text length
+    // Get plain text for character counting
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = highlightedText;
-    const plainText = tempDiv.textContent;
+    const plainText = tempDiv.textContent || tempDiv.innerText;
     
-    // Typing animation
-    let charIndex = 0;
-    const typingSpeed = 8; // ms per character
-    
-    // Add cursor
+    // Reset content with cursor
     textElement.innerHTML = '<span class="typing-cursor"></span>';
     
+    let charIndex = 0;
+    const typingSpeed = 6; // ms per character (faster)
+    const charsPerFrame = 2; // Type multiple characters per frame for speed
+    
     typingInterval = setInterval(() => {
-        if (charIndex < plainText.length) {
-            // Calculate how much of the highlighted HTML to show
-            const partialText = getPartialHighlightedText(highlightedText, charIndex + 1);
-            textElement.innerHTML = partialText + '<span class="typing-cursor"></span>';
-            charIndex++;
-        } else {
+        if (!isTyping) {
+            stopTyping();
+            return;
+        }
+        
+        charIndex += charsPerFrame;
+        
+        if (charIndex >= plainText.length) {
             // Typing complete
-            clearInterval(typingInterval);
-            typingInterval = null;
             textElement.innerHTML = highlightedText + '<span class="typing-cursor"></span>';
+            stopTyping();
             
-            // Remove cursor after a delay
+            // Remove cursor after delay
             setTimeout(() => {
                 const cursor = textElement.querySelector('.typing-cursor');
-                if (cursor) cursor.remove();
+                if (cursor) cursor.style.opacity = '0';
             }, 2000);
+        } else {
+            // Show partial text
+            const partialText = getPartialHighlightedText(highlightedText, charIndex);
+            textElement.innerHTML = partialText + '<span class="typing-cursor"></span>';
         }
     }, typingSpeed);
 }
@@ -276,15 +416,13 @@ function typeText(tabName) {
 function getPartialHighlightedText(html, charCount) {
     let result = '';
     let visibleChars = 0;
-    let inTag = false;
     let i = 0;
     
     while (i < html.length && visibleChars < charCount) {
         const char = html[i];
         
+        // Handle HTML tags
         if (char === '<') {
-            inTag = true;
-            // Find the end of this tag
             const tagEnd = html.indexOf('>', i);
             if (tagEnd !== -1) {
                 result += html.substring(i, tagEnd + 1);
@@ -293,8 +431,8 @@ function getPartialHighlightedText(html, charCount) {
             }
         }
         
+        // Handle HTML entities
         if (char === '&') {
-            // Handle HTML entities
             const semicolon = html.indexOf(';', i);
             if (semicolon !== -1 && semicolon - i < 10) {
                 result += html.substring(i, semicolon + 1);
@@ -304,19 +442,12 @@ function getPartialHighlightedText(html, charCount) {
             }
         }
         
-        if (!inTag) {
-            result += char;
-            visibleChars++;
-        }
-        
-        if (char === '>') {
-            inTag = false;
-        }
-        
+        result += char;
+        visibleChars++;
         i++;
     }
     
-    // Close any open tags
+    // Close any open span tags
     const openSpans = (result.match(/<span[^>]*>/g) || []).length;
     const closeSpans = (result.match(/<\/span>/g) || []).length;
     for (let j = 0; j < openSpans - closeSpans; j++) {
@@ -394,6 +525,18 @@ function initAnimations() {
         scale: 0.95,
         duration: 1.2,
         delay: 0.5,
+        ease: 'expo.out'
+    });
+    
+    // Blueprint section animation
+    gsap.from('.blueprint-dashboard', {
+        scrollTrigger: {
+            trigger: '.blueprint-dashboard',
+            start: 'top 80%',
+        },
+        opacity: 0,
+        y: 40,
+        duration: 1,
         ease: 'expo.out'
     });
 }
