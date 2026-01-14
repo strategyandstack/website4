@@ -1,5 +1,5 @@
 import { salesArchitectureData as data } from './data.js';
-import { createValuePropCard, createBlueprintNavItem, createBlueprintDisplay, createBlueprintAccordion, createPricingCard, createStatItem, createRoadmapItem, createFaqItem } from './components.js';
+import { createValuePropCard, createBlueprintNavItem, createBlueprintDisplay, createBlueprintAccordion, createPricingCard, createStatItem, createRoadmapItem, createFaqItem, createMarketDynamics, createSecondaryCTANote } from './components.js';
 
 const LANG = 'en';
 
@@ -51,16 +51,20 @@ We help {{industry}} companies like {{companyName}} build outbound systems that 
 let currentBlueprintIndex = 0;
 let typingInterval = null;
 let isTyping = false;
+let ctaHoverTimeout = null;
+let blurOverlay = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     if (!data) return;
+    initBlurOverlay();
     initMouseGlow();
     initScrollProgress();
     initLayout();
     initNavScroll();
     initActiveNavHighlight();
+    initSmoothScroll();
     initEmailEditor();
-    initEditorScrollFade();
+    initEditorScrollEffect();
     initBlueprintInteraction();
     initBlueprintAccordion();
     initSectionReveals();
@@ -68,9 +72,16 @@ document.addEventListener('DOMContentLoaded', () => {
     initFaqAnimations();
     initStatsCounter();
     initMobileStickyCta();
+    initCTAFocusEffect();
     initAnimations();
     lucide.createIcons();
 });
+
+function initBlurOverlay() {
+    blurOverlay = document.createElement('div');
+    blurOverlay.className = 'page-blur-overlay';
+    document.body.appendChild(blurOverlay);
+}
 
 function initMouseGlow() {
     const glow = document.createElement('div');
@@ -122,20 +133,78 @@ function initActiveNavHighlight() {
     sections.forEach(section => observer.observe(section));
 }
 
-function initEditorScrollFade() {
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+}
+
+function initEditorScrollEffect() {
     const editor = document.querySelector('.email-editor-container');
-    if (!editor) return;
+    const statsSection = document.getElementById('stats-section');
+    if (!editor || !statsSection) return;
+    
+    const heroSection = editor.closest('section');
+    if (!heroSection) return;
+    
     window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
-        if (scrollY > 200) {
-            const opacity = 1 - Math.min((scrollY - 200) / 300, 1);
-            editor.style.opacity = opacity;
-            editor.style.transform = `translateY(${-(scrollY - 200) * 0.3}px)`;
+        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+        const statsTop = statsSection.offsetTop;
+        
+        // Calculate progress (0 to 1) as we scroll through the hero
+        const scrollStart = 100;
+        const scrollEnd = statsTop - 100;
+        const progress = Math.max(0, Math.min(1, (scrollY - scrollStart) / (scrollEnd - scrollStart)));
+        
+        if (scrollY < scrollStart) {
+            // Before scroll effect starts
+            editor.style.transform = 'perspective(1000px) rotateX(0deg) scale(1)';
+            editor.style.opacity = '1';
+        } else if (progress < 1) {
+            // During scroll - scale up and apply trapezoid effect (coming toward viewer)
+            const scale = 1 + (progress * 0.15); // Scale up to 1.15
+            const rotateX = progress * -8; // Tilt top away (trapezoid effect)
+            const translateY = progress * -30; // Move up slightly
+            
+            editor.style.transform = `perspective(1000px) rotateX(${rotateX}deg) scale(${scale}) translateY(${translateY}px)`;
+            editor.style.opacity = Math.max(0, 1 - (progress * 1.2));
         } else {
-            editor.style.opacity = 1;
-            editor.style.transform = 'translateY(0)';
+            // After stats section - fully hidden
+            editor.style.opacity = '0';
         }
     }, { passive: true });
+}
+
+function initCTAFocusEffect() {
+    const ctaSelectors = '.btn-primary, .btn-secondary, .display-cta, .pricing-cta';
+    const ctas = document.querySelectorAll(ctaSelectors);
+    
+    ctas.forEach(cta => {
+        cta.addEventListener('mouseenter', () => {
+            ctaHoverTimeout = setTimeout(() => {
+                blurOverlay.classList.add('active');
+                cta.classList.add('cta-focus');
+            }, 300);
+        });
+        
+        cta.addEventListener('mouseleave', () => {
+            if (ctaHoverTimeout) {
+                clearTimeout(ctaHoverTimeout);
+                ctaHoverTimeout = null;
+            }
+            blurOverlay.classList.remove('active');
+            cta.classList.remove('cta-focus');
+        });
+    });
 }
 
 function initSectionReveals() {
@@ -165,12 +234,14 @@ function initMobileStickyCta() {
 
 function initLayout() {
     document.title = data.meta.name + " | " + data.meta.tagline;
+    
     const vpContainer = document.getElementById('value-props');
     if (vpContainer) {
         vpContainer.innerHTML = createValuePropCard('Battle Tested', data.value_proposition.supporting, 'layers') +
             createValuePropCard('Full Ownership', 'We build on your infrastructure. Accounts, data, and content stay with you forever.', 'key') +
             createValuePropCard('The Outcome', data.value_proposition.outcome, 'rocket');
     }
+    
     const gList = document.getElementById('guarantees-list');
     if (gList) {
         data.guarantee.what_we_guarantee.forEach(item => {
@@ -180,57 +251,76 @@ function initLayout() {
             gList.appendChild(li);
         });
     }
+    
     const mList = document.getElementById('market-depends-list');
     if (mList) {
-        mList.innerHTML = `<div class="market-dynamics"><div class="market-dynamics-label">Results vary by market</div><div class="market-dynamics-list">${data.guarantee.what_depends_on_market.map(item => `<span class="market-dynamics-item">${item}</span>`).join('')}</div></div>`;
+        mList.innerHTML = createMarketDynamics(data.guarantee.what_depends_on_market, LANG);
     }
+    
     const statsGrid = document.getElementById('stats-grid');
-    if (statsGrid) data.social_proof.stats.forEach(stat => statsGrid.innerHTML += createStatItem(stat));
-    const blueprintContainer = document.getElementById('blueprints-container');
-    if (blueprintContainer) {
-        let navItems = data.blueprints.map((bp, i) => createBlueprintNavItem(bp, i === 0)).join('');
-        blueprintContainer.innerHTML = `<div class="blueprint-dashboard"><div class="blueprint-nav">${navItems}</div><div class="blueprint-display active" id="blueprint-display">${createBlueprintDisplay(data.blueprints[0], LANG)}</div></div>${createBlueprintAccordion(data.blueprints, LANG)}`;
-        setTimeout(() => animateHoursBars(), 100);
+    if (statsGrid) statsGrid.innerHTML = data.social_proof.stats.map(s => createStatItem(s)).join('');
+    
+    const bpContainer = document.getElementById('blueprints-container');
+    if (bpContainer) {
+        bpContainer.innerHTML = `
+<div class="blueprint-dashboard section-reveal">
+    <div class="blueprint-nav">${data.blueprints.map((bp, i) => createBlueprintNavItem(bp, i === 0)).join('')}</div>
+    <div class="blueprint-display" id="blueprint-display">${createBlueprintDisplay(data.blueprints[0], LANG)}</div>
+</div>
+${createBlueprintAccordion(data.blueprints, LANG)}`;
+        setTimeout(() => {
+            const display = document.getElementById('blueprint-display');
+            if (display) display.classList.add('active');
+            animateHoursBars();
+        }, 100);
     }
+    
     const pricingGrid = document.getElementById('pricing-grid');
-    if (pricingGrid) data.packages.forEach(pkg => pricingGrid.innerHTML += createPricingCard(pkg, LANG));
-    const roadmapContainer = document.getElementById('next-steps-container');
-    if (roadmapContainer) data.next_steps.forEach((step, idx) => roadmapContainer.innerHTML += createRoadmapItem(step, idx));
+    if (pricingGrid) pricingGrid.innerHTML = data.packages.map(p => createPricingCard(p, LANG)).join('');
+    
+    const stepsContainer = document.getElementById('next-steps-container');
+    if (stepsContainer) stepsContainer.innerHTML = data.next_steps.map((s, i) => createRoadmapItem(s, i)).join('');
+    
     const faqContainer = document.getElementById('faq-container');
-    if (faqContainer) data.faq.forEach((item, index) => faqContainer.innerHTML += createFaqItem(item, index));
-    const primaryTitle = document.getElementById('cta-primary-title');
-    if (primaryTitle) {
-        primaryTitle.textContent = data.cta_sections.primary.headline;
-        document.getElementById('cta-primary-sub').textContent = data.cta_sections.primary.subheadline;
-        document.getElementById('cta-primary-btn').textContent = data.cta_sections.primary.button_text;
-        document.getElementById('cta-primary-secondary').textContent = data.cta_sections.primary.secondary_text;
-        document.getElementById('cta-secondary-title').textContent = data.cta_sections.secondary.headline;
-        document.getElementById('cta-secondary-sub').textContent = data.cta_sections.secondary.subheadline;
-        document.getElementById('cta-secondary-btn').textContent = data.cta_sections.secondary.button_text;
-        document.getElementById('footer-tagline').textContent = data.footer.tagline || "";
-        document.getElementById('footer-powered').textContent = data.footer.powered_by || "";
+    if (faqContainer) faqContainer.innerHTML = data.faq.map((f, i) => createFaqItem(f, i)).join('');
+    
+    const ctaPrimaryTitle = document.getElementById('cta-primary-title');
+    const ctaPrimarySub = document.getElementById('cta-primary-sub');
+    const ctaPrimaryBtn = document.getElementById('cta-primary-btn');
+    const ctaPrimarySecondary = document.getElementById('cta-primary-secondary');
+    if (ctaPrimaryTitle) ctaPrimaryTitle.textContent = data.cta_sections.primary.headline;
+    if (ctaPrimarySub) ctaPrimarySub.textContent = data.cta_sections.primary.subheadline;
+    if (ctaPrimaryBtn) ctaPrimaryBtn.textContent = data.cta_sections.primary.button_text;
+    if (ctaPrimarySecondary) ctaPrimarySecondary.textContent = data.cta_sections.primary.secondary_text;
+    
+    const ctaSecondaryTitle = document.getElementById('cta-secondary-title');
+    const ctaSecondarySub = document.getElementById('cta-secondary-sub');
+    const ctaSecondaryBtn = document.getElementById('cta-secondary-btn');
+    const ctaSecondaryCard = document.getElementById('cta-secondary-card');
+    if (ctaSecondaryTitle) ctaSecondaryTitle.textContent = data.cta_sections.secondary.headline;
+    if (ctaSecondarySub) ctaSecondarySub.textContent = data.cta_sections.secondary.subheadline;
+    if (ctaSecondaryBtn) ctaSecondaryBtn.textContent = data.cta_sections.secondary.button_text;
+    
+    // Add secondary note to the secondary CTA card
+    if (ctaSecondaryCard && data.cta_sections.secondary.note_text) {
+        const noteHtml = createSecondaryCTANote(data.cta_sections.secondary.note_text, data.cta_sections.secondary.scarcity_text);
+        ctaSecondaryCard.insertAdjacentHTML('beforeend', noteHtml);
     }
+    
+    const footerTagline = document.getElementById('footer-tagline');
+    const footerPowered = document.getElementById('footer-powered');
+    if (footerTagline) footerTagline.textContent = data.footer.tagline;
+    if (footerPowered) footerPowered.textContent = data.footer.powered_by;
 }
 
 function animateHoursBars() {
     document.querySelectorAll('.hours-bar[data-width]').forEach(bar => {
-        setTimeout(() => bar.style.width = bar.dataset.width, 200);
-    });
-}
-
-function initBlueprintAccordion() {
-    document.querySelectorAll('.blueprint-accordion-item').forEach(item => {
-        item.querySelector('.blueprint-accordion-header').addEventListener('click', () => {
-            const wasActive = item.classList.contains('active');
-            document.querySelectorAll('.blueprint-accordion-item').forEach(i => i.classList.remove('active'));
-            if (!wasActive) item.classList.add('active');
-        });
+        setTimeout(() => { bar.style.width = bar.dataset.width; }, 100);
     });
 }
 
 function initRoadmapAnimation() {
     const items = document.querySelectorAll('.roadmap-item');
-    if (!items.length) return;
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -238,7 +328,7 @@ function initRoadmapAnimation() {
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.1 });
     items.forEach(item => observer.observe(item));
 }
 
@@ -280,6 +370,17 @@ function initBlueprintInteraction() {
     });
 }
 
+function initBlueprintAccordion() {
+    const items = document.querySelectorAll('.blueprint-accordion-item');
+    items.forEach(item => {
+        item.querySelector('.blueprint-accordion-header').addEventListener('click', () => {
+            const wasActive = item.classList.contains('active');
+            items.forEach(i => i.classList.remove('active'));
+            if (!wasActive) item.classList.add('active');
+        });
+    });
+}
+
 function loadBlueprint(index) {
     const display = document.getElementById('blueprint-display');
     const bp = data.blueprints[index];
@@ -292,6 +393,7 @@ function loadBlueprint(index) {
     animateBlueprintContent(bp);
     setTimeout(() => display.classList.add('active'), 700);
     setTimeout(() => animateHoursBars(), 100);
+    initCTAFocusEffect(); // Re-init for new CTAs
     lucide.createIcons();
 }
 
