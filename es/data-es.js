@@ -26,9 +26,9 @@ export const salesArchitectureData = {
       "Eres dueño de todo lo que construimos (cuentas, contenido, datos)"
     ],
     "what_depends_on_market": [
-      "Tasas de respuesta y conversión",
+      "Cómo responden los prospectos a tu alcance",
       "Reuniones agendadas y negocios cerrados",
-      "Costo por lead y costo de adquisición"
+      "Tu costo por lead y adquisición de clientes"
     ]
   },
   "blueprints": [
@@ -38,7 +38,7 @@ export const salesArchitectureData = {
       "name": "Configuración de Cuentas",
       "tagline": "La base de todo",
       "description": "Instalamos la infraestructura que necesitas antes de enviar un solo mensaje: dominios verificados, cuentas de correo calentadas, perfiles de LinkedIn optimizados y una landing page enfocada en conversión.",
-      "timeline": "2 a 3 semanas desde el inicio hasta bandejas completamente calentadas",
+      "timeline": "2 a 4 semanas desde el inicio para asegurar bandejas completamente calentadas",
       "price": "$8,125",
       "deliverables": [
         "2 dominios personalizados con SPF, DKIM y DMARC configurados",
@@ -57,8 +57,8 @@ export const salesArchitectureData = {
       "number": 2,
       "name": "Contenido",
       "tagline": "Construye confianza antes de que llegue tu primer mensaje",
-      "description": "12 semanas de contenido para LinkedIn e Instagram usando un framework probado 40/30/30: Contenido Educativo, Personal y de Ventas que te posiciona como experto.",
-      "timeline": "Calendario de contenido entregado en 2 semanas",
+      "description": "Contenido para LinkedIn e Instagram usando un framework probado 40/30/30: Contenido Educativo, Personal y de Ventas que te posiciona como experto.",
+      "timeline": "Calendario de contenido para cubrir 3+ meses, entregado en 2 semanas",
       "price": "$2,625",
       "deliverables": [
         "26 publicaciones nativas para LinkedIn e Instagram",
@@ -76,8 +76,8 @@ export const salesArchitectureData = {
       "number": 3,
       "name": "Anuncios",
       "tagline": "Publicidad pagada que acelera todo",
-      "description": "Configuramos y ejecutamos campañas de generación de leads en Meta, Google y LinkedIn durante 30 días usando un enfoque de embudo estructurado: anuncios de Awareness (25%), Consideración (25%) y Decisión (50%).",
-      "timeline": "Campañas activas en la primera semana",
+      "description": "Configuramos y ejecutamos campañas de generación de leads en Meta, Google y LinkedIn usando un enfoque de embudo estructurado: anuncios de Awareness (25%), Consideración (25%) y Decisión (50%).",
+      "timeline": "Campañas activas en la primera semana, corre por 30 días",
       "price": "$7,750",
       "deliverables": [
         "Configuración de campañas en Meta, Google y LinkedIn",
@@ -180,7 +180,7 @@ export const salesArchitectureData = {
     },
     {
       "question": "¿Cómo garantizan la entregabilidad de correos?",
-      "answer": "Garantizamos la infraestructura correcta: dominios verificados, SPF, DKIM y DMARC configurados, más bandejas calentadas al 95%+ de entregabilidad antes de que comience cualquier alcance. Monitoreamos la entregabilidad durante todo el proyecto. Las tasas de respuesta reales dependen de tu oferta, mercado y segmentación."
+      "answer": "Garantizamos la infraestructura correcta: dominios verificados, SPF, DKIM y DMARC configurados, más bandejas calentadas al 98%+ de entregabilidad antes de que comience cualquier alcance. Monitoreamos la entregabilidad durante todo el proyecto. Las tasas de respuesta reales dependen de tu oferta, mercado y segmentación."
     },
     {
       "question": "¿Puedo personalizar los mensajes de alcance?",
@@ -192,7 +192,7 @@ export const salesArchitectureData = {
     },
     {
       "question": "¿Cuánto tiempo hasta ver resultados?",
-      "answer": "La Configuración de Cuentas toma 2 a 3 semanas para calentamiento de dominios y optimización de perfiles. Una vez activo, las campañas de outbound típicamente generan respuestas en las primeras 2 semanas. El contenido construye momentum en 4 a 6 semanas. Los anuncios pueden generar tráfico inmediatamente una vez lanzados. La mayoría de los clientes ven actividad significativa en el pipeline dentro de 30 a 45 días de estar activos."
+      "answer": "La Configuración de Cuentas toma 2 a 4 semanas para calentamiento de dominios y optimización de perfiles. Una vez activo, las campañas de outbound típicamente generan respuestas en las primeras 2 semanas. El contenido construye momentum en 4 a 6 semanas. Los anuncios pueden generar tráfico inmediatamente una vez lanzados. La mayoría de los clientes ven actividad significativa en el pipeline dentro de 30 a 45 días de estar activos."
     },
     {
       "question": "¿Qué necesito proporcionar?",
@@ -215,7 +215,7 @@ export const salesArchitectureData = {
     "stats": [
       {"metric": "Ahorro de Tiempo", "value": "70", "suffix": "%+"},
       {"metric": "Más Rápido que DIY", "value": "7", "suffix": "x"},
-      {"metric": "Meta de Entregabilidad", "value": "95", "suffix": "%+"}
+      {"metric": "Meta de Entregabilidad", "value": "98", "suffix": "%+"}
     ]
   },
   "cta_sections": {
@@ -228,7 +228,9 @@ export const salesArchitectureData = {
     "secondary": {
       "headline": "¿No sabes por dónde empezar?",
       "subheadline": "Hagamos una auditoría de tu stack actual e identifiquemos el punto de mayor impacto.",
-      "button_text": "Agenda una Llamada de Descubrimiento"
+      "button_text": "Agenda una Llamada de Descubrimiento",
+      "note_text": "Sin compromiso",
+      "scarcity_text": "Incorporamos 2 clientes por mes para asegurar calidad"
     }
   },
   "next_steps": [
