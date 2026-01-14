@@ -4,7 +4,7 @@ export const salesArchitectureData = {
     "version": "4.0",
     "tagline": "Build Your Sales Engine Faster Than Ever",
     "website": "StrategyandStack.com",
-    "powered_by": ["LinkedIn Success Formula", "AuthGen", "RocketsTraffic", "Evil Genius Corp"]
+    "powered_by": "LinkedIn Success Formula + AuthGen + RocketsTraffic + Evil Genius Corp"
   },
   "hero": {
     "headline": "Build Your Sales Engine Faster Than Ever",
@@ -29,16 +29,6 @@ export const salesArchitectureData = {
       "Response rates and conversion rates",
       "Meetings booked and deals closed",
       "Cost per lead and cost per acquisition"
-    ]
-  },
-  "target_market": {
-    "title": "Who This Is For",
-    "criteria": [
-      "US-based service businesses: CPA firms, law firms, agencies, consultancies, SaaS",
-      "Cash flow positive companies that have grown through referrals",
-      "Teams with operational capacity to handle more clients but no outbound system",
-      "Business owners who would rather hire experts than figure it out themselves",
-      "Companies ready to move beyond word of mouth to predictable lead flow"
     ]
   },
   "blueprints": [
@@ -166,7 +156,7 @@ export const salesArchitectureData = {
       "name": "Full Stack",
       "tagline": "All Four Sales Blueprints",
       "price": "$21,000",
-      "description": "For businesses going all in on demand generation",
+      "description": "For businesses going all-in on demand generation",
       "includes": ["Account Setup Blueprint", "Content Blueprint (12 weeks)", "Ads Blueprint (30 days)", "Outbound Blueprint (90 days)"],
       "savings": "Save $2,375 vs. separate blueprints"
     },
@@ -179,37 +169,6 @@ export const salesArchitectureData = {
       "includes": ["Everything in Full Stack", "Custom process automation", "Advanced routing, dashboards, and integrations", "Revenue share option for qualified businesses"]
     }
   ],
-  "linkedin_success_formula": {
-    "title": "The Operating System Behind Every Blueprint",
-    "description": "A structured framework with strict character limits and validation rules based on 9 months of tested data across multiple industries. Every piece of content and outreach passes through our compliance protocols.",
-    "key_components": {
-      "headline": {
-        "name": "Headline Logic",
-        "formula": "I help [A] do [B], through [C]. If you want [D], then do [E] and get [F].",
-        "spec": "220 Chars Max"
-      },
-      "about_me": {
-        "name": "About Me Engine",
-        "formula": "[Hook 300c] -> [Core Value] -> [Framework] -> [Social Proof] -> [Soft CTA]",
-        "spec": "1650 Chars Max"
-      },
-      "outreach": {
-        "name": "Outreach Protocol",
-        "formula": "Day 0: Intro | Day 2: Insight | Day 4: Network Frame",
-        "spec": "450 Chars Per Message"
-      }
-    },
-    "validation": {
-      "checks": [
-        "Exact character count matching",
-        "Hook strength validation",
-        "Line break cadence verification",
-        "Prohibited phrase detection",
-        "Service Seed alignment check",
-        "Protrusion-free truncation check"
-      ]
-    }
-  },
   "faq": [
     {
       "question": "How is this different from hiring an agency?",
@@ -254,14 +213,14 @@ export const salesArchitectureData = {
     }
   },
   "next_steps": [
-    "Book a 30-minute strategy call. We confirm which blueprint or package fits your situation",
-    "Complete the Activation Form. Required to begin; allows us to finalize scope and timelines",
-    "Scope and pricing confirmation. Final confirmation of deliverables",
-    "Payment and kickoff. Project queued for implementation",
-    "Implementation begins within 48 hours. Work starts following your selected blueprint timeline"
+    "Book a 30-minute strategy call. We confirm which blueprint or package fits your situation.",
+    "Complete the Activation Form. Required to begin; allows us to finalize scope and timelines.",
+    "Scope and pricing confirmation. Final confirmation of deliverables.",
+    "Payment and kickoff. Project queued for implementation.",
+    "Implementation begins within 48 hours. Work starts following your selected blueprint timeline."
   ],
   "footer": {
     "tagline": "Sales Architecture | Build Your Engine",
-    "powered_by": "LinkedIn Success Formula + AuthGen + RocketsTraffic + Evil Genius Corp"
+    "powered_by": "Powered by LinkedIn Success Formula + AuthGen + RocketsTraffic + Evil Genius Corp"
   }
 };
