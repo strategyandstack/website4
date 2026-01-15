@@ -15,7 +15,7 @@ export const createABetterWaySection = (data, lang = 'en') => {
 <section id="a-better-way" class="py-16 px-4">
     <div class="max-w-6xl mx-auto">
         <div class="text-center mb-12 section-reveal">
-            <div class="text-[9px] font-black uppercase tracking-[0.3em] text-white/40 mb-4">${data.section_label}</div>
+            <div class="text-[9px] font-black uppercase tracking-[0.3em] text-white/60 mb-4">${data.section_label}</div>
             <h2 class="text-4xl md:text-5xl font-black tracking-tighter uppercase">${data.section_title}</h2>
         </div>
         <div class="grid md:grid-cols-2 gap-6 section-reveal">
@@ -139,8 +139,8 @@ export const createBlueprintAccordion = (blueprints, lang = 'en') => {
         // Only show hours if both values exist
         const hours = (bp.comparison.blueprint_hours && bp.comparison.manual_hours) ? `
 <div class="mobile-hours">
-    <div class="mobile-hours-row"><span class="text-xs text-white/40 uppercase tracking-wider font-bold">${l.blueprint}</span><span class="text-sm font-bold">${bp.comparison.blueprint_hours} hrs</span></div>
-    <div class="mobile-hours-row"><span class="text-xs text-white/40 uppercase tracking-wider font-bold">${l.manual}</span><span class="text-sm font-bold manual-time">${bp.comparison.manual_hours}+ hrs</span></div>
+    <div class="mobile-hours-row"><span class="text-xs text-white/60 uppercase tracking-wider font-bold">${l.blueprint}</span><span class="text-sm font-bold">${bp.comparison.blueprint_hours} hrs</span></div>
+    <div class="mobile-hours-row"><span class="text-xs text-white/60 uppercase tracking-wider font-bold">${l.manual}</span><span class="text-sm font-bold manual-time">${bp.comparison.manual_hours}+ hrs</span></div>
 </div>` : '';
         return `
 <div class="blueprint-accordion-item ${i === 0 ? 'active' : ''}" data-index="${i}">
@@ -149,10 +149,10 @@ export const createBlueprintAccordion = (blueprints, lang = 'en') => {
         <div class="accordion-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
     </div>
     <div class="blueprint-accordion-content"><div class="accordion-inner">
-        <p class="text-sm text-white/50 mb-4 leading-relaxed">${bp.description}</p>
-        ${bp.timeline ? `<p class="text-xs text-white/40 mb-4"><strong class="text-white/50">${l.timeline}:</strong> ${bp.timeline}</p>` : ''}
+        <p class="text-sm text-white/70 mb-4 leading-relaxed">${bp.description}</p>
+        ${bp.timeline ? `<p class="text-xs text-white/60 mb-4"><strong class="text-white/70">${l.timeline}:</strong> ${bp.timeline}</p>` : ''}
         ${hours}
-        <ul class="space-y-2 mb-4">${bp.deliverables.map(d => `<li class="flex items-start gap-2 text-xs text-white/50"><span class="text-white/30">→</span>${d}</li>`).join('')}</ul>
+        <ul class="space-y-2 mb-4">${bp.deliverables.map(d => `<li class="flex items-start gap-2 text-xs text-white/70"><span class="text-white/55">→</span>${d}</li>`).join('')}</ul>
         <div class="flex items-center justify-between pt-4 border-t border-white/5">
             <span class="text-lg font-bold">${price}</span>
             <a href="https://app.apollo.io/#/meet/managed-meetings/eddie/hor-57g-ivh/start" target="_blank" rel="noopener noreferrer" class="bg-white text-black px-4 py-2 rounded-md text-xs font-bold uppercase tracking-wide">${l.cta}</a>
@@ -184,7 +184,7 @@ export const createPricingCard = (pkg, lang = 'en') => {
 export const createStatItem = (stat) => `
 <div class="stat-item text-center">
     <div class="text-3xl md:text-4xl font-black mb-1 tracking-tighter">${stat.prefix || ''}<span class="stat-counter" data-target="${stat.value}">0</span>${stat.suffix || ''}</div>
-    <div class="text-[9px] uppercase font-black tracking-[0.25em] text-white/40">${stat.metric}</div>
+    <div class="text-[9px] uppercase font-black tracking-[0.25em] text-white/60">${stat.metric}</div>
 </div>`;
 
 export const createRoadmapItem = (step, idx) => `
