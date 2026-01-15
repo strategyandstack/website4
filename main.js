@@ -446,6 +446,11 @@ function scrambleText(element, targetText) {
 }
 
 function initEmailEditor() {
+    const editorContainer = document.querySelector('.email-editor-container');
+    if (editorContainer) {
+        editorContainer.style.opacity = '1';
+    }
+    
     const tabs = document.querySelectorAll('.editor-tab');
     if (!tabs.length) return;
     Object.keys(emailTemplates).forEach(tabName => {
