@@ -281,7 +281,7 @@ h1, h2, h3, h4 { letter-spacing: -0.04em; font-weight: 900; }
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.6);
     background: transparent;
     white-space: nowrap;
     transition: all 0.3s ease;
@@ -457,7 +457,7 @@ h1, h2, h3, h4 { letter-spacing: -0.04em; font-weight: 900; }
 .nav-number {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 10px;
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.6);
     font-weight: 700;
 }
 
@@ -471,7 +471,7 @@ h1, h2, h3, h4 { letter-spacing: -0.04em; font-weight: 900; }
 
 .nav-tagline {
     font-size: 9px;
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.55);
     margin-top: 3px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -541,14 +541,14 @@ h1, h2, h3, h4 { letter-spacing: -0.04em; font-weight: 900; }
 }
 
 .display-description {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
     line-height: 1.6;
     font-size: 13px;
 }
 
 .display-timeline {
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.6);
     margin-top: 8px;
 }
 
@@ -565,7 +565,7 @@ h1, h2, h3, h4 { letter-spacing: -0.04em; font-weight: 900; }
 .hours-label {
     width: 100px;
     font-size: 10px;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.6);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-weight: 700;
@@ -705,7 +705,7 @@ h1, h2, h3, h4 { letter-spacing: -0.04em; font-weight: 900; }
     .accordion-number {
         font-family: ui-monospace, monospace;
         font-size: 10px;
-        color: rgba(255, 255, 255, 0.3);
+        color: rgba(255, 255, 255, 0.6);
         font-weight: 700;
     }
     
@@ -720,7 +720,7 @@ h1, h2, h3, h4 { letter-spacing: -0.04em; font-weight: 900; }
         display: flex;
         align-items: center;
         justify-content: center;
-        color: rgba(255, 255, 255, 0.4);
+        color: rgba(255, 255, 255, 0.6);
         transition: transform 0.3s ease;
     }
     
@@ -840,7 +840,7 @@ h1, h2, h3, h4 { letter-spacing: -0.04em; font-weight: 900; }
 
 .pricing-tagline {
     font-size: 10px;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.6);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-weight: 700;
@@ -854,7 +854,7 @@ h1, h2, h3, h4 { letter-spacing: -0.04em; font-weight: 900; }
 
 .pricing-description {
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
     margin-bottom: 12px;
     min-height: 36px;
 }
@@ -993,7 +993,7 @@ h1, h2, h3, h4 { letter-spacing: -0.04em; font-weight: 900; }
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
     transition: color 0.3s ease;
 }
 
@@ -1004,14 +1004,14 @@ h1, h2, h3, h4 { letter-spacing: -0.04em; font-weight: 900; }
     width: 20px;
     height: 20px;
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.6);
 }
 
 details[open] .faq-icon { transform: rotate(180deg); }
 
 .faq-content {
     padding: 0 24px 20px;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
     font-size: 13px;
     line-height: 1.7;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
@@ -1039,7 +1039,7 @@ details[open] .faq-icon { transform: rotate(180deg); }
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
     margin-bottom: 16px;
 }
 
@@ -1072,7 +1072,7 @@ details[open] .faq-icon { transform: rotate(180deg); }
 .cta-secondary-note .note-line {
     font-size: 11px;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.6);
     text-transform: uppercase;
     letter-spacing: 0.1em;
 }
