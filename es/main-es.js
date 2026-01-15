@@ -1,5 +1,5 @@
 import { salesArchitectureData as data } from './data-es.js';
-import { createValuePropCard, createBlueprintNavItem, createBlueprintDisplay, createBlueprintAccordion, createPricingCard, createStatItem, createRoadmapItem, createFaqItem, createMarketDynamics, createSecondaryCTANote } from '../components.js';
+import { createValuePropCard, createBlueprintNavItem, createBlueprintDisplay, createBlueprintAccordion, createPricingCard, createStatItem, createRoadmapItem, createFaqItem, createMarketDynamics, createSecondaryCTANote, createABetterWaySection, createWhoThisIsForSection } from '../components.js';
 
 const LANG = 'es';
 
@@ -189,7 +189,6 @@ function initCTAFocusEffect() {
             ctaHoverTimeout = setTimeout(() => {
                 blurOverlay.classList.add('active');
                 cta.classList.add('cta-focus');
-                // Elevate parent card above blur
                 const parentCard = cta.closest('.glass-card, .pricing-card, .blueprint-display');
                 if (parentCard) parentCard.classList.add('card-elevated');
             }, 300);
@@ -202,7 +201,6 @@ function initCTAFocusEffect() {
             }
             blurOverlay.classList.remove('active');
             cta.classList.remove('cta-focus');
-            // Remove elevation from parent card
             const parentCard = cta.closest('.glass-card, .pricing-card, .blueprint-display');
             if (parentCard) parentCard.classList.remove('card-elevated');
         });
@@ -236,6 +234,12 @@ function initMobileStickyCta() {
 
 function initLayout() {
     document.title = data.meta.name + " | " + data.meta.tagline;
+    
+    // Inject Una Mejor Manera section
+    const aBetterWayContainer = document.getElementById('a-better-way-container');
+    if (aBetterWayContainer && data.a_better_way) {
+        aBetterWayContainer.innerHTML = createABetterWaySection(data.a_better_way, LANG);
+    }
     
     const vpContainer = document.getElementById('value-props');
     if (vpContainer) {
@@ -275,6 +279,12 @@ ${createBlueprintAccordion(data.blueprints, LANG)}`;
             if (display) display.classList.add('active');
             animateHoursBars();
         }, 100);
+    }
+    
+    // Inject Para Quién Es Esto section
+    const whoThisIsForContainer = document.getElementById('who-this-is-for-container');
+    if (whoThisIsForContainer && data.who_this_is_for) {
+        whoThisIsForContainer.innerHTML = createWhoThisIsForSection(data.who_this_is_for, LANG);
     }
     
     const pricingGrid = document.getElementById('pricing-grid');
@@ -517,5 +527,4 @@ function initAnimations() {
     gsap.from('#hero-headline', { opacity: 0, y: 50, duration: 1.2, ease: 'expo.out' });
     gsap.from('.hero-content p, .hero-content .flex', { opacity: 0, y: 25, duration: 1, stagger: 0.1, delay: 0.2, ease: 'power3.out' });
     gsap.from('.email-editor', { opacity: 0, scale: 0.96, duration: 1, delay: 0.4, ease: 'expo.out' });
-    // Removed blueprint-dashboard animation - conflicts with section-reveal CSS
 }
