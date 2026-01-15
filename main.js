@@ -74,7 +74,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileStickyCta();
     initCTAFocusEffect();
     initAnimations();
-    lucide.createIcons();
+    try {
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    } catch (e) {
+        console.warn('Lucide icons failed to load:', e);
+    }
 });
 
 function initBlurOverlay() {
@@ -405,7 +411,13 @@ function loadBlueprint(index) {
     setTimeout(() => display.classList.add('active'), 700);
     setTimeout(() => animateHoursBars(), 100);
     initCTAFocusEffect();
-    lucide.createIcons();
+    try {
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    } catch (e) {
+        console.warn('Lucide icons failed to load:', e);
+    }
 }
 
 function animateBlueprintContent(bp) {
