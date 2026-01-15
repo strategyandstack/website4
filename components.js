@@ -7,6 +7,89 @@ export const createValuePropCard = (title, description, icon) => `
     <p class="text-gray-400 leading-relaxed text-sm">${description}</p>
 </div>`;
 
+export const createABetterWaySection = (data, lang = 'en') => {
+    const problem = data.problem;
+    const solution = data.solution;
+    
+    return `
+<section id="a-better-way" class="py-16 px-4">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12 section-reveal">
+            <div class="text-[9px] font-black uppercase tracking-[0.3em] text-white/40 mb-4">${data.section_label}</div>
+            <h2 class="text-4xl md:text-5xl font-black tracking-tighter uppercase">${data.section_title}</h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6 section-reveal">
+            <div class="better-way-card problem-card glass-card p-8 rounded-2xl border-white/10 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-red-500/50 to-orange-500/50"></div>
+                <div class="problem-badge inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 mb-6">
+                    <i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-red-400"></i>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-red-400">${problem.badge}</span>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-black mb-4 tracking-tight">${problem.title}</h3>
+                <p class="text-sm text-gray-400 leading-relaxed mb-6">${problem.description}</p>
+                <ul class="space-y-3">
+                    ${problem.pain_points.map(point => `
+                    <li class="flex items-start gap-3 text-sm text-gray-400">
+                        <span class="flex-shrink-0 w-5 h-5 rounded flex items-center justify-center mt-0.5">
+                            <i data-lucide="x" class="w-3.5 h-3.5 text-red-400/70"></i>
+                        </span>
+                        <span>${point}</span>
+                    </li>`).join('')}
+                </ul>
+            </div>
+            <div class="better-way-card solution-card glass-card p-8 rounded-2xl border-white/10 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-purple-500/50 to-cyan-500/50"></div>
+                <div class="solution-badge inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 mb-6">
+                    <img src="/favicon.svg" alt="" class="w-3.5 h-3.5">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-purple-400">${solution.badge}</span>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-black mb-4 tracking-tight">${solution.title}</h3>
+                <p class="text-sm text-gray-400 leading-relaxed mb-6">${solution.description}</p>
+                <ul class="space-y-3">
+                    ${solution.benefits.map(benefit => `
+                    <li class="flex items-start gap-3 text-sm text-gray-400">
+                        <span class="flex-shrink-0 w-5 h-5 rounded flex items-center justify-center mt-0.5">
+                            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400/70"></i>
+                        </span>
+                        <span>${benefit}</span>
+                    </li>`).join('')}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>`;
+};
+
+export const createWhoThisIsForSection = (data, lang = 'en') => {
+    return `
+<section id="who-this-is-for" class="py-16 px-4 bg-white/[0.01]">
+    <div class="max-w-6xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="section-reveal">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 mb-6">
+                    <img src="/favicon.svg" alt="" class="w-3.5 h-3.5">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-purple-400">${data.section_label}</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black mb-4 tracking-tighter">${data.section_title}</h2>
+                <p class="text-base text-gray-400 leading-relaxed">${data.description}</p>
+            </div>
+            <div class="space-y-4 section-reveal">
+                ${data.criteria.map(item => `
+                <div class="who-criteria-item glass-card p-5 rounded-xl border-white/10 flex items-start gap-4 group hover:border-white/20 transition-all">
+                    <div class="w-10 h-10 bg-purple-500/10 rounded-lg flex items-center justify-center flex-shrink-0 border border-purple-500/20 group-hover:scale-110 transition-transform">
+                        <i data-lucide="${item.icon}" class="w-5 h-5 text-purple-400"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm mb-1">${item.title}</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed">${item.description}</p>
+                    </div>
+                </div>`).join('')}
+            </div>
+        </div>
+    </div>
+</section>`;
+};
+
 export const createBlueprintNavItem = (bp, isActive = false) => `
 <div class="blueprint-nav-item ${isActive ? 'active' : ''}" data-blueprint-id="${bp.id}" data-blueprint-index="${bp.number - 1}">
     <span class="nav-number">${String(bp.number).padStart(2, '0')}</span>
