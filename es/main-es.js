@@ -258,7 +258,7 @@ function initLayout() {
     if (gList) {
         data.guarantee.what_we_guarantee.forEach(item => {
             const li = document.createElement('li');
-            li.className = 'flex items-start gap-4 text-gray-400 group';
+            li.className = 'flex items-start gap-4 text-gray-300 group';
             li.innerHTML = `<div class="w-6 h-6 rounded-md bg-white/5 flex items-center justify-center shrink-0 border border-white/10 group-hover:bg-white group-hover:border-white transition-all"><i data-lucide="check" class="w-3 h-3 text-white group-hover:text-black"></i></div><span class="text-base font-medium leading-tight group-hover:text-white transition-colors">${item}</span>`;
             gList.appendChild(li);
         });
