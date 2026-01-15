@@ -496,15 +496,33 @@ function getPartialHighlightedText(html, charCount) {
 
 function highlightSyntax(text) {
     let escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    
+    // Token color mapping
+    const tokenColors = {
+        'firstName': 'syntax-firstname',
+        'senderName': 'syntax-sender',
+        'companyName': 'syntax-company',
+        'industry': 'syntax-industry'
+    };
+    
+    // Helper to colorize a single token
+    const colorizeToken = (match, varName) => {
+        const colorClass = tokenColors[varName] || 'syntax-variable';
+        return `<span class="${colorClass}">{{${varName}}}</span>`;
+    };
+    
+    // Process RANDOM blocks
     escaped = escaped.replace(/\{\{RANDOM\s*\|([^}]+)\}\}/g, (m, content) => {
         const parts = content.split('|').map(p => p.trim());
         const highlighted = parts.map((part, i) => {
-            const v = part.replace(/\{\{(\w+)\}\}/g, '<span class="syntax-variable">{{$1}}</span>');
+            const v = part.replace(/\{\{(\w+)\}\}/g, colorizeToken);
             return i < parts.length - 1 ? v + ' <span class="syntax-pipe">|</span> ' : v;
         }).join('');
-        return `<span class="syntax-random">{{RANDOM |</span> ${highlighted} <span class="syntax-random">}}</span>`;
+        return `<span class="syntax-random">{{RANDOM}}</span> ${highlighted}`;
     });
-    return escaped.replace(/\{\{(\w+)\}\}/g, '<span class="syntax-variable">{{$1}}</span>');
+    
+    // Process remaining standalone tokens
+    return escaped.replace(/\{\{(\w+)\}\}/g, colorizeToken);
 }
 
 function initStatsCounter() {
