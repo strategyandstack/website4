@@ -558,6 +558,10 @@ function initStatsCounter() {
 }
 
 function initAnimations() {
+    // Animations disabled for consistent loading
+    return;
+    
+    /*
     if (typeof gsap === 'undefined') {
         console.warn('GSAP not loaded');
         return;
@@ -595,4 +599,5 @@ function initAnimations() {
     } catch (e) {
         console.warn('GSAP animation failed:', e);
     }
+    */
 }
