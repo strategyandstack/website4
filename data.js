@@ -12,6 +12,57 @@ export const salesArchitectureData = {
     "cta_primary": "Book a Strategy Call",
     "cta_secondary": "See How It Works"
   },
+  "a_better_way": {
+    "section_label": "Why This Exists",
+    "section_title": "A Better Way",
+    "problem": {
+      "badge": "The Problem",
+      "title": "The Problem We Solve",
+      "description": "Most businesses grow through referrals until they hit a ceiling. When they try to add outbound, they face a painful choice: hire expensive sales staff with no guarantee of results, or waste months trying to figure it out themselves.",
+      "pain_points": [
+        "Hiring takes 3-6 months with no guaranteed results",
+        "Agencies lock you into retainers without ownership",
+        "DIY means reinventing the wheel every time"
+      ]
+    },
+    "solution": {
+      "badge": "Our Solution",
+      "title": "Sales Architecture",
+      "description": "We install proven sales infrastructure, the same systems, automations, and processes that work across 200+ campaigns, customized for your business. You own everything. We just make sure it works.",
+      "benefits": [
+        "Live in days, not months",
+        "70%+ savings vs. building manually",
+        "Full ownership of all systems and data"
+      ]
+    }
+  },
+  "who_this_is_for": {
+    "section_label": "Ideal Fit",
+    "section_title": "Who This Is For",
+    "description": "Our blueprints work best for established service businesses ready to add predictable outbound revenue.",
+    "criteria": [
+      {
+        "icon": "grid-3x3",
+        "title": "US-Based Businesses",
+        "description": "CPA firms, law firms, agencies, consultancies, and SaaS companies"
+      },
+      {
+        "icon": "trending-up",
+        "title": "Cash Flow Positive",
+        "description": "Companies that have grown through referrals and are ready to scale"
+      },
+      {
+        "icon": "users",
+        "title": "Operational Capacity",
+        "description": "Teams that can handle more clients but lack the outbound system to reach them"
+      },
+      {
+        "icon": "dollar-sign",
+        "title": "High-Value Ticket",
+        "description": "Average deal size of $2,000+ where outbound ROI makes sense"
+      }
+    ]
+  },
   "value_proposition": {
     "main": "We install sales systems that generate leads while you close deals",
     "supporting": "A proven framework for generating leads and booking meetings without building a large sales team. Combines automation, AI, and battle-tested processes to deliver results that would traditionally require 3x to 5x more staff hours.",
